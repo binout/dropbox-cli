@@ -1,0 +1,35 @@
+= Dropbox CLI
+
+== Description
+
+A Command Line Interface to drive your https://www.dropbox.com/[dropbox],
+based on https://dropbox.github.io/dropbox-api-v2-explorer/[Dropbox API v2].
+
+== Pre-requisites
+
+* Java 8
+* Dropbox API Key
+
+== Launch CLI
+
+First, you need to build project with maven.
+
+Then,
+
+[source]
+----
+./start.sh <API_KEY>
+----
+
+or
+
+[source]
+----
+java -Ddropbox.api.key=<API_KEY> -jar target/dropbox-cli.jar
+----
+
+== Available Commands
+
+whoami:: print the current user name
+
+ls:: list a folder, use `--path` to indicate source folder

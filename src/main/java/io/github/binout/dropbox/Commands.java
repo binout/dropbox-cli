@@ -20,21 +20,25 @@ import io.github.binout.dropbox.model.Path;
 import org.tomitribe.crest.api.Command;
 import org.tomitribe.crest.api.Default;
 import org.tomitribe.crest.api.Option;
-import org.tomitribe.crest.api.Out;
 
-import java.io.PrintStream;
+import java.util.stream.Collectors;
 
 public class Commands {
 
     private final static Dropbox API = Dropbox.api();
 
     @Command
-    public void ls(@Option("path") @Default("") Path path, @Out final PrintStream out) {
-        API.listFolder(path).stream().map(Folder::getName).forEach(out::println);
+    public String whoami() {
+        return API.currentAccount().getName().getDisplayName();
     }
 
     @Command
-    public void whoami(@Out final PrintStream out) {
-        out.println(API.currentAccount().getName().getDisplayName());
+    public String ls(@Option("path") @Default("") Path path) {
+        return API.listFolder(path).stream().map(Folder::getName).collect(Collectors.joining(System.lineSeparator()));
+    }
+
+    @Command
+    public void mkdir(Path path) {
+        API.createFolder(path);
     }
 }

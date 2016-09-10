@@ -31,6 +31,10 @@ public interface Dropbox {
     @Headers("Content-Type: application/json")
     FolderList listFolder(Path path);
 
+    @RequestLine("POST /files/create_folder")
+    @Headers("Content-Type: application/json")
+    void createFolder(Path path);
+
     @RequestLine("POST /users/get_current_account")
     Account currentAccount();
 

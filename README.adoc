@@ -32,4 +32,31 @@ java -Ddropbox.api.key=<API_KEY> -jar target/dropbox-cli.jar
 
 whoami:: print the current user name
 
+[source]
+----
+benoit@1.8.0 $ whoami
+Benoît Prioux
+----
+
 ls:: list a folder, use `--path` to indicate source folder
+
+[source]
+----
+benoit@1.8.0 $ ls
+/Photos
+/Public
+benoit@1.8.0 $ ls --path=/Photos
+/Photos/flower.png
+/Photos/apple.jpg
+----
+
+mkdir:: create a folder
+
+[source]
+----
+benoit@1.8.0 $ mkdir /Documents
+benoit@1.8.0 $ ls
+/Photos
+/Public
+/Documents
+----

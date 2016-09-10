@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>io.github.binout</groupId>
+    <artifactId>dropbox-cli</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+
+        <feign.version>8.18.0</feign.version>
+        <tomitribe.version>0.8</tomitribe.version>
+    </properties>
+    
+    <dependencies>
+        <!-- feign -->
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-gson</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+
+        <!-- crest -->
+        <dependency>
+            <groupId>org.tomitribe</groupId>
+            <artifactId>tomitribe-crest-api</artifactId>
+            <version>${tomitribe.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tomitribe</groupId>
+            <artifactId>tomitribe-crest-cli</artifactId>
+            <version>${tomitribe.version}</version>
+        </dependency>
+
+        <!-- Runtime -->
+        <dependency>
+            <groupId>org.tomitribe</groupId>
+            <artifactId>tomitribe-crest-xbean</artifactId>
+            <version>${tomitribe.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.tomitribe</groupId>
+            <artifactId>tomitribe-crest</artifactId>
+            <version>${tomitribe.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.2.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>io.github.binout.dropbox.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

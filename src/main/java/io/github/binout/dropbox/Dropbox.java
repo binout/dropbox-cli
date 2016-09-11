@@ -25,6 +25,7 @@ import io.github.binout.dropbox.model.Account;
 import io.github.binout.dropbox.model.FolderList;
 import io.github.binout.dropbox.model.Path;
 
+// tag::feignInterface[]
 public interface Dropbox {
 
     @RequestLine("POST /files/list_folder")
@@ -37,11 +38,13 @@ public interface Dropbox {
 
     @RequestLine("POST /users/get_current_account")
     Account currentAccount();
+    // end::feignInterface[]
 
     static String apiKey() {
         return System.getProperty("dropbox.api.key");
     }
 
+    // tag::feignBuilder[]
     static Dropbox api() {
         return Feign.builder()
                 .encoder(new GsonEncoder())
@@ -49,4 +52,6 @@ public interface Dropbox {
                 .requestInterceptor(r -> r.header("Authorization", "Bearer " + apiKey()))
                 .target(Dropbox.class, "https://api.dropboxapi.com/2");
     }
+    // end::feignBuilder[]
+
 }

@@ -22,7 +22,8 @@ import org.tomitribe.crest.api.Default;
 import org.tomitribe.crest.api.Option;
 import org.tomitribe.crest.cli.api.CrestCli;
 
-import java.util.stream.Collectors;
+import static java.lang.System.lineSeparator;
+import static java.util.stream.Collectors.joining;
 
 public class Commands {
 
@@ -47,7 +48,7 @@ public class Commands {
     public String ls(@Option("path") @Default("") Path path) {
         return API.listFolder(path).stream()
                 .map(Folder::getName)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(joining(lineSeparator()));
     }
     // end::crestCommand3[]
 

@@ -20,6 +20,7 @@ import io.github.binout.dropbox.model.Path;
 import org.tomitribe.crest.api.Command;
 import org.tomitribe.crest.api.Default;
 import org.tomitribe.crest.api.Option;
+import org.tomitribe.crest.cli.api.CrestCli;
 
 import java.util.stream.Collectors;
 
@@ -27,18 +28,32 @@ public class Commands {
 
     private final static Dropbox API = Dropbox.api();
 
+    // tag::crestCommand1[]
     @Command
     public String whoami() {
         return API.currentAccount().getName().getDisplayName();
     }
+    // end::crestCommand1[]
 
-    @Command
-    public String ls(@Option("path") @Default("") Path path) {
-        return API.listFolder(path).stream().map(Folder::getName).collect(Collectors.joining(System.lineSeparator()));
-    }
-
+    // tag::crestCommand2[]
     @Command
     public void mkdir(Path path) {
         API.createFolder(path);
     }
+    // end::crestCommand2[]
+
+    // tag::crestCommand3[]
+    @Command
+    public String ls(@Option("path") @Default("") Path path) {
+        return API.listFolder(path).stream()
+                .map(Folder::getName)
+                .collect(Collectors.joining(System.lineSeparator()));
+    }
+    // end::crestCommand3[]
+
+    // tag::crestCli[]
+    public static void main(String[] args) throws Exception {
+        new CrestCli().run(args);
+    }
+    // end::crestCli[]
 }

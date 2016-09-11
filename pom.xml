@@ -87,7 +87,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>io.github.binout.dropbox.Main</mainClass>
+                                    <mainClass>io.github.binout.dropbox.Commands</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

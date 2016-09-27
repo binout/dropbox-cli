@@ -26,6 +26,7 @@ public class DropboxCliSteps {
         }
     }
 
+    // tag::bddSteps[]
     @Given("^a dropbox api key$")
     public void a_dropbox_api_key() throws Throwable {
         assertThat(Dropbox.apiKey()).isNotNull();
@@ -40,6 +41,7 @@ public class DropboxCliSteps {
     public void it_should_return_my_name() throws Throwable {
         assertThat(result).contains("Benoît Prioux");
     }
+    // tag::bddSteps[]
 
     @Then("^it should return a list of path$")
     public void it_should_return_a_list_of_path() throws Throwable {

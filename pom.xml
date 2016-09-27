@@ -16,6 +16,7 @@
 
         <feign.version>8.18.0</feign.version>
         <tomitribe.version>0.8</tomitribe.version>
+        <skipTests>true</skipTests> <!-- skip tests by default because need Dropbox API Key ... -->
     </properties>
     
     <dependencies>
@@ -117,19 +118,44 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.github.cukedoctor</groupId>
-                <artifactId>cukedoctor-maven-plugin</artifactId>
-                <version>1.0.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                        <phase>test</phase>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>bdd</id>
+            <activation>
+                <property>
+                    <name>env.DROPBOX_API_KEY</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skipTests>false</skipTests>
+                            <systemPropertyVariables>
+                                <dropbox.api.key>${env.DROPBOX_API_KEY}</dropbox.api.key>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.cukedoctor</groupId>
+                        <artifactId>cukedoctor-maven-plugin</artifactId>
+                        <version>1.0.2</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <phase>test</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

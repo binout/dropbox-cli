@@ -1,2 +1,3 @@
 #!/bin/bash
-java -Ddropbox.api.key=$1 -jar target/dropbox-cli.jar
+echo "Launching Dropbox CLI"
+java -Ddropbox.api.key=$DROPBOX_API_KEY -jar target/dropbox-cli.jar

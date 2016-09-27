@@ -10,6 +10,8 @@ based on https://dropbox.github.io/dropbox-api-v2-explorer/[Dropbox API v2].
 * Java 8
 * Dropbox API Key
 
+TIP: use `. init-env.sh <API_KEY>` to set Dropbox API key as environment variable.
+
 == Launch CLI
 
 First, you need to build project with maven.

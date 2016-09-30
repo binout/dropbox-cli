@@ -57,4 +57,9 @@ public class Commands {
         new CrestCli().run(args);
     }
     // end::crestCli[]
+
+    @Command
+    public String ln(Path path) {
+        return API.shareFile(path).url();
+    }
 }

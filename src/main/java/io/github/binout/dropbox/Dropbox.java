@@ -24,6 +24,7 @@ import feign.gson.GsonEncoder;
 import io.github.binout.dropbox.model.Account;
 import io.github.binout.dropbox.model.FolderList;
 import io.github.binout.dropbox.model.Path;
+import io.github.binout.dropbox.model.Url;
 
 // tag::feignInterface[]
 public interface Dropbox {
@@ -38,6 +39,7 @@ public interface Dropbox {
 
     @RequestLine("POST /users/get_current_account")
     Account currentAccount();
+
     // end::feignInterface[]
 
     static String apiKey() {
@@ -53,5 +55,9 @@ public interface Dropbox {
                 .target(Dropbox.class, "https://api.dropboxapi.com/2");
     }
     // end::feignBuilder[]
+
+    @RequestLine("POST /sharing/create_shared_link")
+    @Headers("Content-Type: application/json")
+    Url shareFile(Path path);
 
 }

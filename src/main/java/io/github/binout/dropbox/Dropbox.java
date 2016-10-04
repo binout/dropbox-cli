@@ -56,7 +56,7 @@ public interface Dropbox {
     }
     // end::feignBuilder[]
 
-    @RequestLine("POST /sharing/create_shared_link")
+    @RequestLine("POST /sharing/create_shared_link_with_settings")
     @Headers("Content-Type: application/json")
     Url shareFile(Path path);
 
